@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Layout v-if="navbarList" :navbar="navbarList">
+        <Layout>
             <router-view />
         </Layout>
     </div>
@@ -22,9 +22,13 @@ export default {
   },
   methods: {
     async getCategory () {
-      const res = await axios.get('https://www.printf520.com:8080/GetType')
-      if (res.data.Code === 0) {
+      const categoryStorage = window.localStorage.getItem('categoryList')
+      if (!categoryStorage) {
+        const res = await axios.get('https://www.printf520.com:8080/GetType')
         this.navbarList = res.data.Data
+        window.localStorage.setItem('categoryList', JSON.stringify(this.navbarList))
+      } else {
+        this.navbarList = JSON.parse(categoryStorage)
       }
     }
   }
