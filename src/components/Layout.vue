@@ -6,7 +6,7 @@
             </div>
             <a-menu theme="dark" mode="inline" :defaultSelectedKeys="defaultSelectedKeys">
                 <a-menu-item @click="currentTitle = item.title" :key="item.id" v-for="item in navbar">
-                    <span class="nav-text">{{ item.title }} ({{ item.sort }})</span>
+                    <router-link :to="`/news/${item.id}`" class="nav-text">{{ item.title }} ({{ item.sort }})</router-link>
                 </a-menu-item>
             </a-menu>
         </a-layout-sider>
@@ -15,7 +15,7 @@
                 <h3>{{ currentTitle }}</h3>
             </a-layout-header>
             <a-layout-content class="content">
-                <slot name="content" />
+                <slot></slot>
             </a-layout-content>
             <a-layout-footer style="textAlign: center">TopList Made by MyFaith © 2019</a-layout-footer>
         </a-layout>
@@ -36,8 +36,14 @@ export default {
   },
   watch: {
     navbar (item) {
-      this.defaultSelectedKeys.push(item[0].id)
-      this.currentTitle = item[0].title
+      const catId = this.$route.params.catId
+      if (!catId) {
+        this.defaultSelectedKeys.push(item[0].id)
+        this.currentTitle = item[0].title
+      } else {
+        this.defaultSelectedKeys.push(catId)
+        this.currentTitle = item.find(e => e.id === parseInt(catId)).title
+      }
     }
   }
 }
