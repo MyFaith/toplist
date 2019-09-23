@@ -15,14 +15,18 @@
                 <h3>{{ currentTitle }}</h3>
             </a-layout-header>
             <a-layout-content class="content">
+                <Loading v-if="loading"></Loading>
                 <slot></slot>
             </a-layout-content>
-            <a-layout-footer style="textAlign: center">TopList Made by MyFaith © 2019</a-layout-footer>
+            <a-layout-footer class="footer">© 2019 Copyright Powered by MyFaith</a-layout-footer>
         </a-layout>
     </a-layout>
 </template>
 <script>
+import Loading from './loading'
+
 export default {
+  components: { Loading },
   props: {
     navbar: {
       type: Array
@@ -30,9 +34,15 @@ export default {
   },
   data () {
     return {
+      loading: false,
       currentTitle: '',
       defaultSelectedKeys: []
     }
+  },
+  created () {
+    this.$bus.$on('loading', (status) => {
+      this.loading = status
+    })
   },
   watch: {
     navbar (item) {
@@ -42,7 +52,10 @@ export default {
         this.currentTitle = item[0].title
       } else {
         this.defaultSelectedKeys.push(catId)
-        this.currentTitle = item.find(e => e.id === parseInt(catId)).title
+        const currentItem = item.find(e => e.id === catId)
+        if (currentItem) {
+          this.currentTitle = currentItem.title
+        }
       }
     }
   }
@@ -52,6 +65,8 @@ export default {
 <style lang="scss">
 .layout {
     .sidebar {
+        height: 100vh;
+        overflow: scroll;
         .logo {
             height: 32px;
             background: rgba(255, 255, 255, 0.2);
@@ -67,6 +82,8 @@ export default {
         }
     }
     .container {
+        height: 100vh;
+        overflow: scroll;
         .header {
             background: #fff;
         }
@@ -74,7 +91,12 @@ export default {
             margin: 24px 16px 0;
             padding: 24px;
             background: #fff;
-            min-height: 360px;
+            height: 100vh;
+            overflow: scroll;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 50px
         }
     }
 }

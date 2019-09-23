@@ -9,6 +9,7 @@ import antd from 'ant-design-vue'
 Vue.use(antd)
 
 Vue.config.productionTip = false
+Vue.prototype.$bus = new Vue()
 
 new Vue({
   router,

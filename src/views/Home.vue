@@ -3,7 +3,7 @@
         <a-list itemLayout="horizontal" :dataSource="newsList">
             <a-list-item slot="renderItem" slot-scope="item">
                 <a-list-item-meta :description="item.desc">
-                    <a slot="title" :href="item.url">{{ item.title }}</a>
+                    <a slot="title" target="_blank" :href="item.url">{{ item.title }}</a>
                     <!-- <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /> -->
                 </a-list-item-meta>
             </a-list-item>
@@ -22,16 +22,26 @@ export default {
   },
   data () {
     return {
-      newsList: []
+      newsList: [],
+      id: this.catId
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.id = to.params.catId
+    this.getNews()
+    next()
   },
   mounted () {
     this.getNews()
   },
   methods: {
     async getNews () {
-      const res = await axios.get('https://www.printf520.com:8080/GetTypeInfo?id=' + this.catId)
+      this.$bus.$emit('loading', true)
+      const res = await axios.get(
+        'https://www.printf520.com:8080/GetTypeInfo?id=' + this.id
+      )
       this.newsList = res.data.Data
+      this.$bus.$emit('loading', false)
     }
   }
 }
