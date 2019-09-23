@@ -1,29 +1,35 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <Layout v-if="navbarList" :navbar="navbarList">
+            <router-view />
+        </Layout>
     </div>
-    <router-view/>
-  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import axios from 'axios'
+import Layout from './components/Layout'
+
+export default {
+  components: { Layout },
+  data () {
+    return {
+      navbarList: []
+    }
+  },
+  created () {
+    this.getCategory()
+  },
+  methods: {
+    async getCategory () {
+      const res = await axios.get('https://www.printf520.com:8080/GetType')
+      if (res.data.Code === 0) {
+        this.navbarList = res.data.Data
+      }
     }
   }
 }
+</script>
+
+<style lang="scss">
 </style>
