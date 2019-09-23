@@ -2,7 +2,7 @@
     <a-layout class="layout">
         <a-layout-sider class="sidebar" breakpoint="lg" collapsedWidth="0">
             <div class="logo">
-                <span class="title">TopList</span>
+                <span class="title">每日热榜</span>
             </div>
             <a-menu theme="dark" mode="inline" :defaultSelectedKeys="defaultSelectedKeys">
                 <a-menu-item @click="currentTitle = item.title" :key="item.id" v-for="item in categoryList">
@@ -51,6 +51,7 @@ export default {
     saveSettings (e) {
       const categoryList = this.$refs.settings._data.categoryList
       if (categoryList) {
+        window.localStorage.setItem('defaultCategory', categoryList[0].id)
         window.localStorage.setItem('categoryList', JSON.stringify(categoryList))
         this.$message.success('保存成功,刷新后生效!')
         this.isShowSettings = false
@@ -92,7 +93,7 @@ export default {
                 justify-content: center;
                 align-items: center;
                 height: 100%;
-                font-size: 20px;
+                font-size: 18px;
             }
         }
     }

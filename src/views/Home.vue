@@ -1,6 +1,11 @@
 <template>
     <div class="news">
-        <a-list itemLayout="horizontal" :dataSource="newsList">
+        <a-list :dataSource="newsList" v-if="imageIdList.includes(catId)">
+            <a-list-item slot="renderItem" slot-scope="item">
+                <img style="max-width: 100%;" :src="item.url" />
+            </a-list-item>
+        </a-list>
+        <a-list itemLayout="horizontal" :dataSource="newsList" v-else>
             <a-list-item slot="renderItem" slot-scope="item">
                 <a-list-item-meta :description="item.desc">
                     <a slot="title" target="_blank" :href="item.url">{{ item.title }}</a>
@@ -22,6 +27,7 @@ export default {
   },
   data () {
     return {
+      imageIdList: ['135', '136'],
       newsList: [],
       id: this.catId
     }
