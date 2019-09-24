@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: `/news/${window.localStorage.getItem('defaultCategory')}`
+      redirect: `/news/${window.localStorage.getItem('defaultCategory') || '1'}`
     },
     {
       path: '/news/:catId',
