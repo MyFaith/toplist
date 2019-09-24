@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.3ab30144b61a4005395124f476e22beb.js"
+  "precache-manifest.a82cf4b1e3b431ec39037c0e1a93a8e1.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "toplist"});
