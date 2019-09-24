@@ -2,7 +2,7 @@
     <div class="settings">
         <h2 class="title">分类编辑</h2>
         <a-button type="primary" @click="resetCategory">恢复分类数据</a-button>
-        <draggable v-model="categoryList" @start="drag=true" @end="drag=false">
+        <draggable class="drag" v-model="categoryList" @start="drag=true" @end="drag=false">
             <div class="cat-item" v-for="cat in categoryList" :key="cat.id">
                 <a-button @click="removeCategory(cat)" icon="delete" shape="circle"></a-button>
                 <span class="name">{{ cat.title }}</span>
@@ -63,15 +63,20 @@ export default {
         display: inline;
         padding-right: 15px;
     }
-    .cat-item {
-        padding: 10px;
-        margin: 10px 0;
-        cursor: crosshair;
-        background-color: #eee;
-        border-radius: 5px;
-        .name {
-            padding-left: 10px;
-        }
+    .drag {
+      display: flex;
+      flex-wrap: wrap;
+      .cat-item {
+          padding: 10px;
+          margin: 10px;
+          width: 130px;
+          cursor: crosshair;
+          background-color: #eee;
+          border-radius: 5px;
+          .name {
+              padding-left: 10px;
+          }
+      }
     }
 }
 </style>
