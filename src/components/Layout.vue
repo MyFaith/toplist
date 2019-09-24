@@ -79,6 +79,15 @@ export default {
 </script>
 
 <style lang="scss">
+@media screen and (max-width: 993px) {
+  .layout {
+    .sidebar {
+      height: 100vh!important;
+      overflow: visible!important;
+    }
+  }
+}
+
 .layout {
     .sidebar {
         height: 100vh;
