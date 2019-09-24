@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     async getNews () {
+      this.newsList = []
       this.$bus.$emit('loading', true)
       const res = await axios.get(
         'https://www.printf520.com:8080/GetTypeInfo?id=' + this.id
