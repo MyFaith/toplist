@@ -14,7 +14,6 @@ script: npm run build
 
 # push到github的web-deploy分支上
 after_script:
-  - git fetch
   - git checkout web-deploy
   - rm -rf ./css
   - rm -rf ./js
