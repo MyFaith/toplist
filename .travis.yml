@@ -3,6 +3,12 @@ language: node_js
 node_js:
   - 11
 
+# 克隆分支
+install:
+  - git clone https://github.com/MyFaith/toplist.git
+  - cd toplist
+  - npm install
+
 # 构建项目
 script: npm run build
 
