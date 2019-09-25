@@ -8,6 +8,7 @@ script: npm run build
 
 # push到github的web-deploy分支上
 after_script:
+  - git fetch
   - git checkout web-deploy
   - rm -rf ./css
   - rm -rf ./js
@@ -17,6 +18,7 @@ after_script:
   - git commit -m "deploy by travis ci"
   - git push "https://${TOKEN}@github.com/MyFaith/toplist.git" web-deploy:web-deploy
 
+# 只监测master分支的修改
 branches:
   only:
     - master
