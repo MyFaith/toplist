@@ -79,19 +79,12 @@ export default {
 </script>
 
 <style lang="scss">
-@media screen and (max-width: 993px) {
-  .layout {
-    .sidebar {
-      height: 100vh!important;
-      overflow: visible!important;
-    }
-  }
-}
-
 .layout {
     .sidebar {
         height: 100vh;
-        overflow: scroll;
+        .ant-layout-sider-children {
+            overflow: scroll;
+        }
         .logo {
             height: 32px;
             background: rgba(255, 255, 255, 0.2);
