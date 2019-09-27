@@ -66,10 +66,11 @@ export default {
     .drag {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       .cat-item {
           padding: 10px;
           margin: 10px;
-          width: 130px;
+          min-width: 130px;
           cursor: crosshair;
           background-color: #eee;
           border-radius: 5px;
