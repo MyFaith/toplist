@@ -10,11 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Clone repository
-      run: |
-        git clone https://github.com/MyFaith/toplist.git
-        cd toplist
+      uses: actions/checkout@v1
     - name: Install dependences
-      run: npm install
+      run: |
+        pwd
+        ls
+        npm install
     - name: Build
       run: npm run build
     - name: Copy files to deploy
