@@ -1,0 +1,18 @@
+name: Auto deploy to Netlify
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone repository
+      run: git clone https://github.com/MyFaith/toplist.git && cd toplist
+    - name: Install dependences
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Copy files to deploy
+      run: git checkout web-deploy && rm -rf ./css && rm -rf ./js && rm -rf ./index.html && cp -r ./dist/* .
+    - name: Deploy site
+      run: git add . && git commit -m "deploy by github actions" && git push "https://${{ secrets.TOKEN }}@github.com/MyFaith/toplist.git" web-deploy:web-deploy
