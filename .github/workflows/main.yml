@@ -27,6 +27,8 @@ jobs:
         cp -r ./dist/* .
     - name: Deploy site
       run: |
+        git config --global user.name "MyFaith'
+        git config --global user.email "myfaith0725@gmail.com"
         git add .
         git commit -m "deploy by github actions"
         git push "https://${{ secrets.TOKEN }}@github.com/MyFaith/toplist.git" web-deploy:web-deploy
