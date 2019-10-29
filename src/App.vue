@@ -24,7 +24,7 @@ export default {
     async getCategory () {
       const categoryStorage = window.localStorage.getItem('categoryList')
       if (!categoryStorage) {
-        const res = await axios.get('https://www.printf520.com:8080/GetType')
+        const res = await axios.get('https://www.tophub.fun:8080/GetType')
         this.navbarList = res.data.Data
         window.localStorage.setItem('defaultCategory', this.navbarList[0].id)
         window.localStorage.setItem('categoryList', JSON.stringify(this.navbarList))

@@ -45,7 +45,7 @@ export default {
       this.newsList = []
       this.$bus.$emit('loading', true)
       const res = await axios.get(
-        'https://www.printf520.com:8080/GetTypeInfo?id=' + this.id
+        'https://www.tophub.fun:8080/GetTypeInfo?id=' + this.id
       )
       this.newsList = res.data.Data
       this.$bus.$emit('loading', false)

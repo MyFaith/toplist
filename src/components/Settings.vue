@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     async resetCategory () {
-      const res = await axios.get('https://www.printf520.com:8080/GetType')
+      const res = await axios.get('https://www.tophub.fun:8080/GetType')
       this.categoryList = res.data.Data
     },
     removeCategory (cat) {
